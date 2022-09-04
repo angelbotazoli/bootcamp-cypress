@@ -26,6 +26,6 @@ describe('Funcionalidade: Adicionar experiência', () => {
     it('Deve excluir uma formacao com sucesso', () => {
         formacaoAcademicaPage.addFormacaoAtual('fatec', 'superior', 'programação', '01/01/2002', 'lalalal')
         cy.get('[data-test="education-delete"]').first().click()
-        cy.contains('Formação Removida').should('exist')
+        cy.contains('Formação Acadêmica Removida').should('exist')
     });
 });
