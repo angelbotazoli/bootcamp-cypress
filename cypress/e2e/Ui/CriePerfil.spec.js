@@ -28,5 +28,3 @@ describe('', () => {
         cy.get('[data-test="dashboard-welcome"]').should('contain', "Angelica Silva")
     });
 });
-
-

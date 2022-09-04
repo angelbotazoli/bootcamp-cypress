@@ -49,7 +49,3 @@ Cypress.Commands.add("cadastrar", () => {
     cy.get('[data-test="register-password2"] > .MuiInputBase-root > .MuiInputBase-input').type('123456')
     cy.get('[data-test="register-submit"]').click()
 })
-
-
-
-

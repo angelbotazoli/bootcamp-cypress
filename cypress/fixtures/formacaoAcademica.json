@@ -1,0 +1,18 @@
+[
+    {
+        "escola": "xpto",
+        "grau": "ypz",
+        "curso": "abc",
+        "dataInicio": "01/01/2022",
+        "dataFim": "01/01/2023",
+        "descricao": "ladainha ladainha ladainha"
+    },
+    {
+        "escola": "horario",
+        "grau": "ensino medio",
+        "curso": "tecnico",
+        "dataInicio": "01/01/2022",
+        "dataFim": "01/01/2023",
+        "descricao": "bla bla bla"
+    }
+]
