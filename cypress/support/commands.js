@@ -27,6 +27,7 @@
 /// <reference types="Cypress" />
 
 const faker = require('faker-br')
+import auth from '../fixtures/auth.json'
 
 Cypress.Commands.add('navigate', (route) => {
     cy.intercept(route).as('loadpage')
@@ -48,4 +49,73 @@ Cypress.Commands.add("cadastrar", () => {
     cy.get('[data-test="register-password"] > .MuiInputBase-root > .MuiInputBase-input').type('123456')
     cy.get('[data-test="register-password2"] > .MuiInputBase-root > .MuiInputBase-input').type('123456')
     cy.get('[data-test="register-submit"]').click()
+})
+
+Cypress.Commands.add("tokenJwt", () => {
+    cy.request({
+        method: 'POST',
+        url: '/api/auth',
+        body: auth
+    }).then((response) => {
+        return response.body.jwt
+    })
+})
+
+Cypress.Commands.add("criarPostagem", (token, value) => {
+    cy.request({
+        method: 'POST',
+        url: '/api/posts',
+        headers: {
+            Cookie: token
+        },
+        body: { "text": value }
+    })
+})
+
+Cypress.Commands.add("criarPerfil", (token, company, status, location, website, skills, bio, githubusername, youtube, twitter, facebook, linkedin, instagram, medium) => {
+    cy.request({
+        method: 'POST',
+        url: '/api/profile',
+        headers: {
+            Cookie: token
+        },
+        body: {
+            "company": company,
+            "status": status,
+            "location": location,
+            "website": website,
+            "skills": skills,
+            "bio": bio,
+            "githubusername": githubusername,
+            "youtube": youtube,
+            "twitter": twitter,
+            "facebook": facebook,
+            "linkedin": linkedin,
+            "instagram": instagram,
+            "medium": medium
+        }
+    })
+})
+
+Cypress.Commands.add("deletarUsuario", (token) => {
+    cy.request({
+        method: 'DELETE',
+        url: '/api/profile',
+        headers: {
+            Cookie: token
+        }
+    })
+})
+
+Cypress.Commands.add("criarUsuario", () => {
+    cy.request({
+        method: 'POST',
+        url: '/api/users',
+        body: {
+
+            "name": "Angelica",
+            "email": auth.email,
+            "password": auth.password
+        }
+    })
 })
