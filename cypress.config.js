@@ -6,10 +6,10 @@ module.exports = defineConfig({
   viewportWidth: 1140,
   viewportHeight: 768,
   defaultCommandTimeout: 10000,
-  projectId: 'idProject',
+  projectId: 'gipooy',
   e2e: {
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
-    
+
     setupNodeEvents(on, config) {
       allureWriter(on, config)
       grepTags(config)

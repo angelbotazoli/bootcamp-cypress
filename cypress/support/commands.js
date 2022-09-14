@@ -27,7 +27,10 @@
 /// <reference types="Cypress" />
 
 const faker = require('faker-br')
+
 import auth from '../fixtures/auth.json'
+import user from '../fixtures/usuarios.json'
+
 
 Cypress.Commands.add('navigate', (route) => {
     cy.intercept(route).as('loadpage')
@@ -39,6 +42,21 @@ Cypress.Commands.add("login", (email, password) => {
     cy.get('[data-test="login-email"] > .MuiInputBase-root > .MuiInputBase-input').type(email)
     cy.get('[data-test="login-password"] > .MuiInputBase-root > .MuiInputBase-input').type(password)
     cy.get('[data-test="login-submit"]').click()
+})
+
+//App Actions
+Cypress.Commands.add("loginApp", () => {
+    cy.request({
+        method: "POST",
+        url: "api/auth",
+        body: {
+            email: user[1].email,
+            password: user[1].senha
+        }
+    }).then((response) => {
+        cy.setCookie('region', 'br-sp')
+        window.localStorage.setItem('token', response.body.jwt)
+    })
 })
 
 Cypress.Commands.add("cadastrar", () => {
